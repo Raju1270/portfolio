@@ -1,0 +1,10 @@
+# Resume Placeholder
+
+This is a placeholder for the resume file. In a real portfolio, this would be a PDF file containing the actual resume.
+
+To add your resume:
+1. Replace this file with your actual resume PDF
+2. Name it `resume.pdf`
+3. Place it in the `/public` directory
+
+The download link in the portfolio will automatically work with this file.
