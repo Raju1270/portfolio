@@ -1,9 +1,20 @@
-import Image from "next/image";
+import Container from '@/components/common/Container'
+import About from '@/components/landing/About'
+import Experience from '@/components/landing/Experience'
+import Hero from '@/components/landing/Hero'
 
-export default function Home() {
+export default function page() {
   return (
-    <div className="">
-      home
-    </div>
-  );
+    <Container className='min-h-screen py-16'>
+      <Hero />
+      <Experience />
+      <About />
+      {/* <Work /> */}
+      {/* <Github /> */}
+      {/* <Blog /> */}
+      {/* <CTA /> */}
+      {/* <Setup /> */}
+      {/* <Journey /> */}
+    </Container>
+  )
 }
