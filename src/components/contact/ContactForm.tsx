@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import * as z from 'zod'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -15,17 +15,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2 } from 'lucide-react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import * as z from 'zod';
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
-import Chat from '../svgs/Chat';
+import Chat from '../svgs/Chat'
 
 const contactFormSchema = z.object({
   name: z.string().min(2, {
@@ -39,7 +33,7 @@ const contactFormSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.',
     })
-    .regex(/^[\+]?[1-9][\d]{0,15}$/, {
+    .regex(/^[+]?[1-9][\d]{0,15}$/, {
       message: 'Please enter a valid phone number.',
     }),
   message: z
@@ -50,12 +44,12 @@ const contactFormSchema = z.object({
     .max(1000, {
       message: 'Message must not exceed 1000 characters.',
     }),
-});
+})
 
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+type ContactFormValues = z.infer<typeof contactFormSchema>
 
 export default function ContactForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -65,10 +59,10 @@ export default function ContactForm() {
       phone: '',
       message: '',
     },
-  });
+  })
 
   const onSubmit = async (data: ContactFormValues) => {
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
       const response = await fetch('/api/contact', {
@@ -77,46 +71,43 @@ export default function ContactForm() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      });
+      })
 
-      const result = await response.json();
+      const result = await response.json()
 
       if (response.ok) {
-        toast.success('Message sent successfully!');
-        form.reset();
+        toast.success('Message sent successfully!')
+        form.reset()
       } else {
-        toast.error(
-          result.error || 'Failed to send message. Please try again.',
-        );
+        toast.error(result.error || 'Failed to send message. Please try again.')
       }
     } catch {
-      toast.error('Something went wrong. Please try again later.');
+      toast.error('Something went wrong. Please try again later.')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
-    <Card className="border-none shadow-none bg-transparent">
+    <Card className='border-none shadow-none bg-transparent'>
       <CardHeader>
         <CardTitle>Send me a message</CardTitle>
         <CardDescription>
-          Fill out the form below and I will get back to you as soon as
-          possible.
+          Fill out the form below and I will get back to you as soon as possible.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+            <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
               <FormField
                 control={form.control}
-                name="name"
+                name='name'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Name *</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your full name" {...field} />
+                      <Input placeholder='Your full name' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -124,12 +115,12 @@ export default function ContactForm() {
               />
               <FormField
                 control={form.control}
-                name="phone"
+                name='phone'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Phone *</FormLabel>
                     <FormControl>
-                      <Input placeholder="+1 (123) xxx-xxxx" {...field} />
+                      <Input placeholder='+1 (123) xxx-xxxx' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -139,16 +130,12 @@ export default function ContactForm() {
 
             <FormField
               control={form.control}
-              name="email"
+              name='email'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email *</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="your.email@example.com"
-                      type="email"
-                      {...field}
-                    />
+                    <Input placeholder='your.email@example.com' type='email' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -157,14 +144,14 @@ export default function ContactForm() {
 
             <FormField
               control={form.control}
-              name="message"
+              name='message'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Message *</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell me about your project or just say hello..."
-                      className="min-h-[120px] resize-none"
+                      placeholder='Tell me about your project or just say hello...'
+                      className='min-h-[120px] resize-none'
                       {...field}
                     />
                   </FormControl>
@@ -173,15 +160,15 @@ export default function ContactForm() {
               )}
             />
 
-            <Button type="submit" className="w-fit cursor-pointer" disabled={isSubmitting}>
+            <Button type='submit' className='w-fit cursor-pointer' disabled={isSubmitting}>
               {isSubmitting ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
                   Sending your message...
                 </>
               ) : (
                 <>
-                  <Chat className="mr-2 h-4 w-4" />
+                  <Chat className='mr-2 h-4 w-4' />
                   Send Message
                 </>
               )}
@@ -190,5 +177,5 @@ export default function ContactForm() {
         </Form>
       </CardContent>
     </Card>
-  );
+  )
 }

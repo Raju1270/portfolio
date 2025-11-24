@@ -1,16 +1,14 @@
 import type { Metadata } from 'next'
-import { Hanken_Grotesk } from 'next/font/google'
 
 import './globals.css'
 
 import { ViewTransitions } from 'next-view-transitions'
+import Footer from '@/components/common/Footer'
 import Navbar from '@/components/common/Navbar'
+import { Quote } from '@/components/common/Quote'
 import { ThemeProvider } from '@/components/common/ThemeProviders'
 import { LenisProvider } from '@/components/lenis-provider'
 import { Toaster } from '@/components/ui/sonner'
-import Footer from '@/components/common/Footer'
-import { Quote } from '@/components/common/Quote'
-
 
 export const metadata: Metadata = {
   title: 'Raju - A Full Stack web developer.',
@@ -52,7 +50,7 @@ export default function RootLayout({
               <Toaster />
               <Navbar />
               {children}
-               <Quote />
+              <Quote />
               <Footer />
             </LenisProvider>
           </ThemeProvider>

@@ -6,6 +6,7 @@ export default function ThreeJs({ className }: { className?: string }) {
       className={className}
       fill='currentColor'
     >
+      <title>Three.js</title>
       <g color='currentColor'>
         <path
           d='M16.219 15.762a1.129 1.129 0 00-1.076 1.399l24.394 98.742a1.129 1.129 0 001.879.544l73.386-70.59a1.129 1.129 0 00-.47-1.899L16.55 15.806a1.129 1.129 0 00-.331-.044zm1.584 2.754l94.024 27.07-70.566 67.877-23.458-94.947z'

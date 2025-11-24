@@ -57,8 +57,8 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
       <div>
         <h4 className='text-md mt-4 mb-2 font-semibold'>Technologies</h4>
         <div className='flex flex-wrap gap-2'>
-          {experience.technologies.map((technology, techIndex: number) => (
-            <Skill key={techIndex} name={technology.name} href={technology.href}>
+          {experience.technologies.map((technology) => (
+            <Skill key={technology.name} name={technology.name} href={technology.href}>
               {technology.icon}
             </Skill>
           ))}
@@ -68,12 +68,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
       {/* Description */}
       <div className='text-secondary flex flex-col'>
         {experience.description.map((description: string) => (
-          <p
-            key={description}
-            dangerouslySetInnerHTML={{
-              __html: `• ${parseDescription(description)}`,
-            }}
-          />
+          <p key={description}>• {parseDescription(description)}</p>
         ))}
       </div>
     </div>

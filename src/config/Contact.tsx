@@ -1,7 +1,6 @@
 export const contactConfig = {
   title: 'Contact',
-  description:
-    'Get in touch with me. I will get back to you as soon as possible.',
+  description: 'Get in touch with me. I will get back to you as soon as possible.',
   form: {
     labels: {
       name: 'Name',
@@ -19,4 +18,4 @@ export const contactConfig = {
     successMessage: "Thanks for your message! I'll get back to you soon.",
     errorMessage: 'Something went wrong. Please try again.',
   },
-};
+}

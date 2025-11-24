@@ -1,3 +1,4 @@
+import { Phone } from 'lucide-react'
 import Github from '@/components/svgs/Github'
 import LinkedIn from '@/components/svgs/LinkedIn'
 import Mail from '@/components/svgs/Mail'
@@ -10,7 +11,6 @@ import PostgreSQL from '@/components/technologies/PostgreSQL'
 import Prisma from '@/components/technologies/Prisma'
 import ReactIcon from '@/components/technologies/ReactIcon'
 import TypeScript from '@/components/technologies/TypeScript'
-import { Phone } from 'lucide-react'
 
 export const skillComponents = {
   TypeScript: TypeScript,
@@ -78,7 +78,6 @@ export const heroConfig = {
 }
 
 export const socialLinks = [
-
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/raju306/',
