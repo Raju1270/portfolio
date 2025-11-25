@@ -1,20 +1,32 @@
-import type { heroConfig } from '@/config/Hero'
+export type SkillDef = {
+  name: string
+  href: string
+  component: string
+}
 
-export const parseTemplate = (template: string, skills: typeof heroConfig.skills) => {
+export type ParsePart =
+  | { type: 'skill'; skill: SkillDef; key: string }
+  | { type: 'bold'; text: string; key: string }
+  | { type: 'text'; text: string; key: string }
+
+export const parseTemplate = (template: string, skills: SkillDef[]): ParsePart[] => {
   const parts = template.split(/(\{skills:\d+\})/)
 
-  return parts.flatMap((part, index): any[] => {
+  return parts.flatMap<ParsePart>((part, index) => {
     const skillMatch = part.match(/\{skills:(\d+)\}/)
     if (skillMatch) {
       const skillIndex = parseInt(skillMatch[1], 10)
       const skill = skills[skillIndex]
       if (skill) {
-        return {
-          type: 'skill',
-          skill: skill,
-          key: index,
-        }
+        return [
+          {
+            type: 'skill',
+            skill,
+            key: `${index}-${skillIndex}`,
+          },
+        ]
       }
+      return []
     }
 
     const boldParts = part.split(/(<b>.*?<\/b>)/)
