@@ -1,4 +1,4 @@
-name: Deploy React
+name: Deploy Next.js
 
 on:
   push:
@@ -19,18 +19,29 @@ jobs:
           script: |
             set -e
 
-            export VITE_API_URL='${{ secrets.VITE_API_URL }}'
-
             APP_DIR=/root/portfolio
             BUILD_DIR=/root/portfolio_build
 
+            echo "→ Updating source"
             cd $APP_DIR
-
             git fetch origin
             git reset --hard origin/main
 
+            echo "→ Installing dependencies"
+            corepack enable
+            corepack prepare pnpm@latest --activate
             pnpm install --frozen-lockfile
+
+            echo "→ Building Next.js static export"
             pnpm run build
 
+            if [ ! -d "out" ]; then
+              echo "Build failed: /out folder missing"
+              exit 1
+            fi
+
+            echo "→ Deploying files"
             sudo rm -rf $BUILD_DIR/*
-            sudo cp -r dist/* $BUILD_DIR/
+            sudo cp -r out/* $BUILD_DIR/
+
+            echo "→ Deployment completed"
