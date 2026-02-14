@@ -25,7 +25,7 @@ export const skillComponents = {
 }
 
 export const heroConfig = {
-  name: 'Raju',
+  name: 'Raju Maurya',
   title: 'A Full Stack web developer.',
   image: '/Raju-square.png',
   skills: [
