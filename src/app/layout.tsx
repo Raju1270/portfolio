@@ -9,8 +9,10 @@ import { Quote } from '@/components/common/Quote'
 import { ThemeProvider } from '@/components/common/ThemeProviders'
 import { LenisProvider } from '@/components/lenis-provider'
 import { Toaster } from '@/components/ui/sonner'
+import { siteConfig } from '@/lib/site'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: 'Raju - A Full Stack web developer.',
   description:
     'Passionate full stack developer focused on scalable applications, enriching user experiences, and impactful projects. Experienced in MERN Stack, Next.js, Go, and modern web technologies.',
@@ -28,6 +30,10 @@ export const metadata: Metadata = {
     title: 'Raju - Full Stack Developer',
     description: 'Passionate developer creating scalable applications with modern technologies',
     type: 'website',
+    url: '/',
+  },
+  alternates: {
+    canonical: '/',
   },
 }
 

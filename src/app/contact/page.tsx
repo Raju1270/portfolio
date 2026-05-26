@@ -1,7 +1,16 @@
+import type { Metadata } from 'next'
+
 import Container from '@/components/common/Container'
 import ContactForm from '@/components/contact/ContactForm'
 import { Separator } from '@/components/ui/separator'
 import { contactConfig } from '@/config/Contact'
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  alternates: {
+    canonical: '/contact',
+  },
+}
 
 export default function ContactPage() {
   return (

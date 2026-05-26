@@ -1,6 +1,15 @@
+import type { Metadata } from 'next'
+
 import Container from '@/components/common/Container'
 import { Separator } from '@/components/ui/separator'
 import { resumeConfig } from '@/config/Resume'
+
+export const metadata: Metadata = {
+  title: 'Resume',
+  alternates: {
+    canonical: '/resume',
+  },
+}
 
 export default function ResumePage() {
   return (
